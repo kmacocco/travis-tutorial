@@ -12,6 +12,8 @@ matrix:
   - python: "3.6"
     env: NUMPY_VERSION=1.12.1
     
-install: pip install numpy==$NUMPY_VERSION
+install: 
+  - docker build -t test-container --bubuild-arg numpy_version=$NUMPY_VERSION
 
-script: py.test
+script: 
+  - docker run -v $PWD:$PWD test-container /bin/bash -c "cd $PWD && pytest"
