@@ -2,25 +2,13 @@ language: python
 
 dist: trusty
 
-script: 
-  - py.test
-  - echo "Hello"
-
-python:
-  - 2.7
-  - 3.6
-env:
-  - NUMPY_VERSION=1.7.1
-  - NUMPY_VERSION=1.12.1
-
-install: pip install numpy==$NUMPY_VERSION
-
 matrix:
   include:
   - python: "2.7"
-    env: TEST_SUITE=suite_2_7
-  - python: "3.3"
-    env: TEST_SUITE=suite_3_3
-  - python: "pypy"
-    env: TEST_SUITE=suite_pypy
-script: ./test.py $TEST_SUITE
+    env: NUMPY_VERSION=1.7.1
+  - python: "3.6"
+    env: NUMPY_VERSION=1.12.1
+    
+install: pip install numpy==$NUMPY_VERSION
+
+script: py.test
